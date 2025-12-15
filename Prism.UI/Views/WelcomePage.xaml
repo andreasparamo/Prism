@@ -11,16 +11,11 @@
         <!-- Background Image -->
         <Image Source="/Assets/Images/background.jpg" Stretch="UniformToFill"/>
 
-        <!-- Dark Overlay for Readability (Optional, adjusting opacity for 'minimalistic' feel) -->
+        <!-- Dark Overlay for Readability -->
         <Rectangle Fill="Black" Opacity="0.3"/>
 
         <!-- Centered Content -->
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-            
-            <!-- Welcome Title (Optional, keeping it clean as requested, just button or minimal text) -->
-            <!-- Using just the button as requested for strictly minimalistic, but a title usually helps. 
-                 I'll add a subtle one, or sticking strictly to prompt: "centered dark, gray button". 
-                 I'll stick to the button to follow instructions exactly, maybe a small greeting above it. -->
             
             <TextBlock Text="Prism" 
                        Foreground="White" 
