@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prism.UI", "Prism.UI\Prism.UI.csproj", "{94EC2B56-1EDB-46A4-94AA-D3029E4098C9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prism.Core", "Prism.Core\Prism.Core.csproj", "{5821CE3A-8F2A-49D4-8215-A022EED0E3C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prism.Monitoring", "Prism.Monitoring\Prism.Monitoring.csproj", "{F8FADEAD-36DB-424F-B2B2-6567370B4A62}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prism.Interventions", "Prism.Interventions\Prism.Interventions.csproj", "{6F16ACA3-3471-4D98-9119-9382F6001494}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prism.Persistence", "Prism.Persistence\Prism.Persistence.csproj", "{836F6EC4-1AF2-4B80-AA94-87C8A15CAAC3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{94EC2B56-1EDB-46A4-94AA-D3029E4098C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94EC2B56-1EDB-46A4-94AA-D3029E4098C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94EC2B56-1EDB-46A4-94AA-D3029E4098C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94EC2B56-1EDB-46A4-94AA-D3029E4098C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5821CE3A-8F2A-49D4-8215-A022EED0E3C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5821CE3A-8F2A-49D4-8215-A022EED0E3C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5821CE3A-8F2A-49D4-8215-A022EED0E3C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5821CE3A-8F2A-49D4-8215-A022EED0E3C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8FADEAD-36DB-424F-B2B2-6567370B4A62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8FADEAD-36DB-424F-B2B2-6567370B4A62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8FADEAD-36DB-424F-B2B2-6567370B4A62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8FADEAD-36DB-424F-B2B2-6567370B4A62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F16ACA3-3471-4D98-9119-9382F6001494}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F16ACA3-3471-4D98-9119-9382F6001494}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F16ACA3-3471-4D98-9119-9382F6001494}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F16ACA3-3471-4D98-9119-9382F6001494}.Release|Any CPU.Build.0 = Release|Any CPU
+		{836F6EC4-1AF2-4B80-AA94-87C8A15CAAC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{836F6EC4-1AF2-4B80-AA94-87C8A15CAAC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{836F6EC4-1AF2-4B80-AA94-87C8A15CAAC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{836F6EC4-1AF2-4B80-AA94-87C8A15CAAC3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
