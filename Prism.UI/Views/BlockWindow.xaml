@@ -1,0 +1,50 @@
+<Window x:Class="Prism.UI.Views.BlockWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        mc:Ignorable="d"
+        Title="BlockWindow" 
+        WindowState="Maximized" 
+        WindowStyle="None" 
+        Topmost="True" 
+        AllowsTransparency="True" 
+        Background="#CC0F172A"
+        ShowInTaskbar="False">
+
+    <Grid>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <!-- Pulsing Shield/Gem -->
+            <Grid HorizontalAlignment="Center" Margin="0,0,0,40">
+                 <iconPacks:PackIconMaterial Kind="ShieldCheck" Width="100" Height="100" Foreground="{StaticResource OpalGradient}" />
+            </Grid>
+
+            <TextBlock Text="You are in a Focus Session" 
+                       FontSize="36" 
+                       FontWeight="Bold" 
+                       Foreground="White" 
+                       HorizontalAlignment="Center"
+                       TextAlignment="Center"
+                       Margin="0,0,0,20"/>
+
+            <TextBlock Text="{Binding Quote}" 
+                       FontSize="18" 
+                       Foreground="{StaticResource TextPrimary}" 
+                       Opacity="0.8" 
+                       HorizontalAlignment="Center"
+                       TextAlignment="Center"
+                       FontStyle="Italic"
+                       Margin="0,0,0,60"/>
+
+            <Button Command="{Binding UnblockCommand}"
+                    Visibility="{Binding CanBypass, Converter={StaticResource BooleanToVisibilityConverter}}"
+                    Content="I really need to access this"
+                    Style="{StaticResource MaterialDesignOutlinedButton}"
+                    Foreground="White"
+                    BorderBrush="White"
+                    HorizontalAlignment="Center"
+                    Padding="20,10"/>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -2,7 +2,7 @@ using System.Windows.Controls;
 
 namespace Prism.UI.Views
 {
-    public partial class DashboardPage : Page
+    public partial class DashboardPage : UserControl
     {
         public DashboardPage()
         {

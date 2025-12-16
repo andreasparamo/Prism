@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.InteropServices;
+using System.Text;
 
 namespace Prism.Monitoring
 {
@@ -25,5 +26,7 @@ namespace Prism.Monitoring
             public uint cbSize;
             public uint dwTime;
         }
+        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        public static extern int GetWindowText(IntPtr hWnd, StringBuilder lpString, int nMaxCount);
     }
 }

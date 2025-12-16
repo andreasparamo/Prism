@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using Prism.UI.Views;
 
 namespace Prism.UI
 {
@@ -11,7 +10,6 @@ namespace Prism.UI
         public MainWindow()
         {
             InitializeComponent();
-            MainFrame.Navigate(new WelcomePage());
         }
     }
 }
