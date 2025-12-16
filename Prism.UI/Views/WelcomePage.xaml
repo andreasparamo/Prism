@@ -1,74 +1,137 @@
-<Page x:Class="Prism.UI.Views.WelcomePage"
+<UserControl x:Class="Prism.UI.Views.WelcomePage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="WelcomePage">
+      d:DesignHeight="768" d:DesignWidth="1024">
 
     <Grid>
         <!-- Background Image -->
-        <Image Source="/Assets/Images/background.jpg" Stretch="UniformToFill"/>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Assets/Images/background.jpg" Stretch="UniformToFill"/>
+        </Grid.Background>
+        
+        <!-- Dark Gradient Overlay -->
+        <Rectangle>
+            <Rectangle.Fill>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#80000000" Offset="0"/>
+                    <GradientStop Color="#CC121212" Offset="0.7"/>
+                    <GradientStop Color="#FF121212" Offset="1"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
 
-        <!-- Dark Overlay for Readability -->
-        <Rectangle Fill="Black" Opacity="0.3"/>
-
-        <!-- Centered Content -->
-        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-            
-            <TextBlock Text="Prism" 
-                       Foreground="White" 
-                       FontSize="48" 
-                       FontWeight="Light" 
-                       HorizontalAlignment="Center" 
-                       Margin="0,0,0,40"
-                       Opacity="0.9">
-                <TextBlock.Effect>
-                    <DropShadowEffect BlurRadius="10" ShadowDepth="0" Color="Black" Opacity="0.5"/>
-                </TextBlock.Effect>
-            </TextBlock>
-
-            <Button x:Name="BtnGetStarted"
-                    Content="Let's get started"
-                    Click="BtnGetStarted_Click"
-                    Background="#333333"
-                    Foreground="White"
-                    FontSize="16"
-                    Padding="30,15"
-                    BorderThickness="0"
-                    Cursor="Hand">
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="5"/>
-                    </Style>
-                </Button.Resources>
-                <Button.Style>
-                    <Style TargetType="Button">
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="Button">
-                                    <Border Background="{TemplateBinding Background}" 
-                                            BorderBrush="{TemplateBinding BorderBrush}" 
-                                            BorderThickness="{TemplateBinding BorderThickness}" 
-                                            CornerRadius="8"
-                                            Padding="{TemplateBinding Padding}">
-                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    </Border>
-                                    <ControlTemplate.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Background" Value="#555555"/>
-                                        </Trigger>
-                                        <Trigger Property="IsPressed" Value="True">
-                                            <Setter Property="Background" Value="#222222"/>
-                                        </Trigger>
-                                    </ControlTemplate.Triggers>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </Button.Style>
-            </Button>
-        </StackPanel>
+        <!-- Content -->
+        <Grid VerticalAlignment="Center" HorizontalAlignment="Center" ClipToBounds="False">
+            <StackPanel HorizontalAlignment="Center" ClipToBounds="False">
+                <!-- Logo -->
+                <TextBlock Text="PRISM" 
+                           FontSize="72" 
+                           FontWeight="Bold" 
+                           FontFamily="Segoe UI" 
+                           Foreground="White"
+                           HorizontalAlignment="Center">
+                    <TextBlock.Effect>
+                        <DropShadowEffect Color="#000000ff" BlurRadius="30" ShadowDepth="0" Opacity="0.6"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                
+                <!-- Tagline -->
+                <TextBlock Text="Take control of your screen time" 
+                           FontSize="20" 
+                           FontWeight="Light"
+                           Foreground="#B0B0B0"
+                           HorizontalAlignment="Center"
+                           Margin="0,10,0,60"/>
+                
+                <!-- Get Started Button -->
+                <Button Command="{Binding GetStartedCommand}"
+                        HorizontalAlignment="Center"
+                        Cursor="Hand"
+                        Height="60"
+                        MinWidth="200"
+                        Margin="0,0,0,30"
+                        RenderTransformOrigin="0.5,0.5">
+                    <Button.RenderTransform>
+                        <ScaleTransform ScaleX="1" ScaleY="1"/>
+                    </Button.RenderTransform>
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="ButtonBorder"
+                                    Background="#FF000000"
+                                    CornerRadius="30"
+                                    RenderTransformOrigin="0.5,0.5"
+                                    SnapsToDevicePixels="True">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Trigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <ColorAnimation Storyboard.TargetName="ButtonBorder"
+                                                                Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                                To="#FF333333" Duration="0:0:0.2"/>
+                                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                                                                 To="1.05" Duration="0:0:0.2">
+                                                    <DoubleAnimation.EasingFunction>
+                                                        <CubicEase EasingMode="EaseOut"/>
+                                                    </DoubleAnimation.EasingFunction>
+                                                </DoubleAnimation>
+                                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+                                                                 To="1.05" Duration="0:0:0.2">
+                                                    <DoubleAnimation.EasingFunction>
+                                                        <CubicEase EasingMode="EaseOut"/>
+                                                    </DoubleAnimation.EasingFunction>
+                                                </DoubleAnimation>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.EnterActions>
+                                    <Trigger.ExitActions>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <ColorAnimation Storyboard.TargetName="ButtonBorder"
+                                                                Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
+                                                                To="#FF000000" Duration="0:0:0.2"/>
+                                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                                                                 To="1.0" Duration="0:0:0.2">
+                                                    <DoubleAnimation.EasingFunction>
+                                                        <CubicEase EasingMode="EaseOut"/>
+                                                    </DoubleAnimation.EasingFunction>
+                                                </DoubleAnimation>
+                                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+                                                                 To="1.0" Duration="0:0:0.2">
+                                                    <DoubleAnimation.EasingFunction>
+                                                        <CubicEase EasingMode="EaseOut"/>
+                                                    </DoubleAnimation.EasingFunction>
+                                                </DoubleAnimation>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </Trigger.ExitActions>
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="ButtonBorder" Property="Background" Value="#FF1A1A1A"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Get Started" FontSize="16" FontWeight="SemiBold" Foreground="White" VerticalAlignment="Center"/>
+                        <materialDesign:PackIcon Kind="ArrowRight" Width="20" Height="20" Margin="10,0,0,0" VerticalAlignment="Center" Foreground="White"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Grid>
+        
+        <!-- Version info at bottom -->
+        <TextBlock Text="Version 1.0.0" 
+                   FontSize="12" 
+                   Foreground="#606060"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Bottom"
+                   Margin="0,0,0,20"/>
     </Grid>
-</Page>
+</UserControl>

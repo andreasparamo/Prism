@@ -4,7 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:viewmodels="clr-namespace:Prism.UI.ViewModels"
         xmlns:views="clr-namespace:Prism.UI.Views"
         mc:Ignorable="d"
@@ -12,41 +11,38 @@
         WindowStartupLocation="CenterScreen"
         TextElement.Foreground="{StaticResource TextPrimary}"
         FontFamily="{materialDesign:MaterialDesignFont}">
-    
+<Window.Resources>
+    <SolidColorBrush x:Key="LogoDefaultBrush" Color="White" />
+    <SolidColorBrush x:Key="LogoAccentBrush" Color="#FF00BFA5" />
+</Window.Resources>
     <Window.DataContext>
         <viewmodels:MainViewModel/>
     </Window.DataContext>
 
-    <Grid>
-        <!-- Background Image Layer -->
-        <Grid.Background>
-            <ImageBrush ImageSource="pack://siteoforigin:,,,/Assets/Images/background.jpg" Stretch="UniformToFill" Opacity="0.15"/>
-        </Grid.Background>
-        
-        <!-- Dark Overlay -->
-        <Rectangle Fill="{StaticResource AppBackground}" Opacity="0.85"/>
-        
+    <Grid Background="{StaticResource AppBackground}">
         <!-- Content Grid -->
         <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="220"/>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
         <!-- Sidebar -->
-        <Border Grid.Column="0" Background="{StaticResource CardBackground}" CornerRadius="0,20,20,0" Margin="0,0,10,0" Effect="{StaticResource MaterialDesignShadowDepth2}">
+        <Border Grid.Column="0" Background="{StaticResource CardBackground}" CornerRadius="0,20,20,0" Margin="0,0,10,0" 
+                Effect="{StaticResource MaterialDesignShadowDepth2}"
+                Visibility="{Binding ShowSidebar, Converter={StaticResource BooleanToVisibilityConverter}}"
+                Width="220">
             <StackPanel>
                 <!-- Logo -->
-                <StackPanel Orientation="Horizontal" Margin="25,40,0,50">
-                     <TextBlock Text="PRISM" FontSize="24" FontWeight="Bold" Margin="15,0,0,0" VerticalAlignment="Center" FontFamily="Segoe UI" Foreground="White" />
-                </StackPanel>
+                <TextBlock Text="PRISM" FontSize="24" FontWeight="Bold" Margin="0,40,0,50" 
+                           HorizontalAlignment="Center" FontFamily="Segoe UI" Foreground="White" />
 
                 <!-- Nav Items -->
                 <RadioButton Style="{StaticResource NavButtonStyle}" 
                              Command="{Binding NavigateDashboardCommand}"
                              IsChecked="True">
                     <StackPanel Orientation="Horizontal">
-                        <iconPacks:PackIconMaterial Kind="ViewDashboardOutline" Width="24" Height="24" Margin="0,0,20,0"/>
+                        <materialDesign:PackIcon Kind="ViewDashboardOutline" Width="24" Height="24" Margin="0,0,20,0" VerticalAlignment="Center"/>
                         <TextBlock Text="Dashboard" FontSize="16" VerticalAlignment="Center"/>
                     </StackPanel>
                 </RadioButton>
@@ -54,7 +50,7 @@
                 <RadioButton Style="{StaticResource NavButtonStyle}" 
                              Command="{Binding NavigateScheduleCommand}">
                     <StackPanel Orientation="Horizontal">
-                        <iconPacks:PackIconMaterial Kind="CalendarClockOutline" Width="24" Height="24" Margin="0,0,20,0"/>
+                        <materialDesign:PackIcon Kind="CalendarClock" Width="24" Height="24" Margin="0,0,20,0" VerticalAlignment="Center"/>
                         <TextBlock Text="Schedule" FontSize="16" VerticalAlignment="Center"/>
                     </StackPanel>
                 </RadioButton>
@@ -62,7 +58,7 @@
                 <RadioButton Style="{StaticResource NavButtonStyle}" 
                              Command="{Binding NavigateStatsCommand}">
                     <StackPanel Orientation="Horizontal">
-                        <iconPacks:PackIconMaterial Kind="ChartBar" Width="24" Height="24" Margin="0,0,20,0"/>
+                        <materialDesign:PackIcon Kind="ChartAreaspline" Width="24" Height="24" Margin="0,0,20,0" VerticalAlignment="Center"/>
                         <TextBlock Text="Analytics" FontSize="16" VerticalAlignment="Center"/>
                     </StackPanel>
                 </RadioButton>
@@ -70,7 +66,7 @@
                 <RadioButton Style="{StaticResource NavButtonStyle}" 
                              Command="{Binding NavigateSettingsCommand}">
                     <StackPanel Orientation="Horizontal">
-                        <iconPacks:PackIconMaterial Kind="CogOutline" Width="24" Height="24" Margin="0,0,20,0"/>
+                        <materialDesign:PackIcon Kind="CogOutline" Width="24" Height="24" Margin="0,0,20,0" VerticalAlignment="Center"/>
                         <TextBlock Text="Settings" FontSize="16" VerticalAlignment="Center"/>
                     </StackPanel>
                 </RadioButton>
@@ -79,26 +75,40 @@
         </Border>
 
         <!-- Main Content -->
-        <ContentControl Grid.Column="1" Content="{Binding CurrentViewModel}" Margin="20" FocusVisualStyle="{x:Null}">
+        <ContentControl Grid.Column="1" Content="{Binding CurrentViewModel}" FocusVisualStyle="{x:Null}">
+            <ContentControl.Style>
+                <Style TargetType="ContentControl">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ShowSidebar}" Value="False">
+                            <Setter Property="Grid.Column" Value="0"/>
+                            <Setter Property="Grid.ColumnSpan" Value="2"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ContentControl.Style>
             <ContentControl.Resources>
+                <DataTemplate DataType="{x:Type viewmodels:WelcomeViewModel}">
+                    <views:WelcomePage/>
+                </DataTemplate>
+                
                 <DataTemplate DataType="{x:Type viewmodels:DashboardViewModel}">
                     <views:DashboardPage/>
                 </DataTemplate>
                 
                 <DataTemplate DataType="{x:Type viewmodels:ScheduleViewModel}">
-                    <Border Background="{StaticResource CardBackground}" CornerRadius="20" Padding="30">
+                    <Border Background="{StaticResource CardBackground}" Padding="30">
                         <TextBlock Text="Schedule (Coming Soon)" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
                 </DataTemplate>
                 
                 <DataTemplate DataType="{x:Type viewmodels:StatsViewModel}">
-                    <Border Background="{StaticResource CardBackground}" CornerRadius="20" Padding="30">
+                    <Border Background="{StaticResource CardBackground}" Padding="30">
                         <TextBlock Text="Statistics (Coming Soon)" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
                 </DataTemplate>
                 
                 <DataTemplate DataType="{x:Type viewmodels:SettingsViewModel}">
-                    <Border Background="{StaticResource CardBackground}" CornerRadius="20" Padding="30">
+                    <Border Background="{StaticResource CardBackground}" Padding="30">
                         <TextBlock Text="Settings (Coming Soon)" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
                 </DataTemplate>

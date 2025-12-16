@@ -41,6 +41,8 @@ The solution uses a Clean Architecture / Modular Monolith approach:
 
 ## Getting Started
 
+
+
 ### Prerequisites
 
 *   **OS:** Windows 10/11 (x64)
@@ -80,3 +82,12 @@ The solution uses a Clean Architecture / Modular Monolith approach:
 *   **Local-Only:** No data ever leaves the user's machine.
 *   **No Cloud APIs:** No accounts, no sync.
 *   **No Admin Rights:** Designed to run in standard User Mode.
+
+---
+
+### Clearing the Welcome Page
+
+To clear the welcome page use this command:
+```powershell
+Remove-Item "$env:LOCALAPPDATA\Prism\welcome_completed" -ErrorAction SilentlyContinue
+```
