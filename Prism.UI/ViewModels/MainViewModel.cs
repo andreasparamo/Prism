@@ -28,7 +28,9 @@ public partial class MainViewModel : ObservableObject
         }
         else
         {
-            CurrentViewModel = new DashboardViewModel();
+            CurrentViewModel = new DashboardViewModel(
+                () => NavigateBlockedWebsites(),
+                () => NavigateBlockedApplications());
         }
     }
 
@@ -58,11 +60,15 @@ public partial class MainViewModel : ObservableObject
     {
         MarkWelcomeCompleted();
         ShowSidebar = true;
-        CurrentViewModel = new DashboardViewModel();
+        CurrentViewModel = new DashboardViewModel(
+            () => NavigateBlockedWebsites(),
+            () => NavigateBlockedApplications());
     }
 
     [RelayCommand]
-    private void NavigateDashboard() => CurrentViewModel = new DashboardViewModel();
+    private void NavigateDashboard() => CurrentViewModel = new DashboardViewModel(
+        () => NavigateBlockedWebsites(),
+        () => NavigateBlockedApplications());
 
     [RelayCommand]
     private void NavigateSchedule() => CurrentViewModel = new ScheduleViewModel();
@@ -72,4 +78,10 @@ public partial class MainViewModel : ObservableObject
 
     [RelayCommand]
     private void NavigateSettings() => CurrentViewModel = new SettingsViewModel();
+
+    [RelayCommand]
+    private void NavigateBlockedWebsites() => CurrentViewModel = new BlockedWebsitesViewModel(() => NavigateDashboard());
+
+    [RelayCommand]
+    private void NavigateBlockedApplications() => CurrentViewModel = new BlockedApplicationsViewModel(() => NavigateDashboard());
 }

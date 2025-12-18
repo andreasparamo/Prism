@@ -13,7 +13,7 @@
         FontFamily="{materialDesign:MaterialDesignFont}">
 <Window.Resources>
     <SolidColorBrush x:Key="LogoDefaultBrush" Color="White" />
-    <SolidColorBrush x:Key="LogoAccentBrush" Color="#FF00BFA5" />
+    <SolidColorBrush x:Key="LogoAccentBrush" Color="#ffffffff" />
 </Window.Resources>
     <Window.DataContext>
         <viewmodels:MainViewModel/>
@@ -111,6 +111,14 @@
                     <Border Background="{StaticResource CardBackground}" Padding="30">
                         <TextBlock Text="Settings (Coming Soon)" FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
+                </DataTemplate>
+                
+                <DataTemplate DataType="{x:Type viewmodels:BlockedWebsitesViewModel}">
+                    <views:BlockedWebsitesPage/>
+                </DataTemplate>
+                
+                <DataTemplate DataType="{x:Type viewmodels:BlockedApplicationsViewModel}">
+                    <views:BlockedApplicationsPage/>
                 </DataTemplate>
             </ContentControl.Resources>
         </ContentControl>
