@@ -20,41 +20,9 @@
                        HorizontalAlignment="Center"/>
             
             <!-- Websites Button -->
-            <Button Height="60"
+            <Button Style="{StaticResource AnimatedButtonStyle}"
                     Margin="0,0,0,20"
-                    Background="#000000"
-                    Foreground="White"
-                    BorderBrush="#2A2A2A"
-                    BorderThickness="1"
-                    Cursor="Hand"
                     Command="{Binding NavigateToBlockedWebsitesCommand}">
-                <Button.Style>
-                    <Style TargetType="Button">
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="Button">
-                                    <Border Background="{TemplateBinding Background}"
-                                            BorderBrush="{TemplateBinding BorderBrush}"
-                                            BorderThickness="{TemplateBinding BorderThickness}"
-                                            CornerRadius="4"
-                                            Padding="20,0">
-                                        <ContentPresenter HorizontalAlignment="Center" 
-                                                          VerticalAlignment="Center"/>
-                                    </Border>
-                                    <ControlTemplate.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Background" Value="#1A1A1A"/>
-                                            <Setter Property="BorderBrush" Value="#3A3A3A"/>
-                                        </Trigger>
-                                        <Trigger Property="IsPressed" Value="True">
-                                            <Setter Property="Background" Value="#0A0A0A"/>
-                                        </Trigger>
-                                    </ControlTemplate.Triggers>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </Button.Style>
                 <StackPanel Orientation="Horizontal">
                     <iconPacks:PackIconMaterial Kind="Web" 
                                                 Width="24" 
@@ -62,46 +30,13 @@
                                                 VerticalAlignment="Center" 
                                                 Margin="0,0,12,0"/>
                     <TextBlock Text="Manage Blocked Websites" 
-                               FontSize="16" 
                                VerticalAlignment="Center"/>
                 </StackPanel>
             </Button>
 
             <!-- Applications Button -->
-            <Button Height="60"
-                    Background="#000000"
-                    Foreground="White"
-                    BorderBrush="#2A2A2A"
-                    BorderThickness="1"
-                    Cursor="Hand"
+            <Button Style="{StaticResource AnimatedButtonStyle}"
                     Command="{Binding NavigateToBlockedApplicationsCommand}">
-                <Button.Style>
-                    <Style TargetType="Button">
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="Button">
-                                    <Border Background="{TemplateBinding Background}"
-                                            BorderBrush="{TemplateBinding BorderBrush}"
-                                            BorderThickness="{TemplateBinding BorderThickness}"
-                                            CornerRadius="4"
-                                            Padding="20,0">
-                                        <ContentPresenter HorizontalAlignment="Center" 
-                                                          VerticalAlignment="Center"/>
-                                    </Border>
-                                    <ControlTemplate.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Background" Value="#1A1A1A"/>
-                                            <Setter Property="BorderBrush" Value="#3A3A3A"/>
-                                        </Trigger>
-                                        <Trigger Property="IsPressed" Value="True">
-                                            <Setter Property="Background" Value="#0A0A0A"/>
-                                        </Trigger>
-                                    </ControlTemplate.Triggers>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </Button.Style>
                 <StackPanel Orientation="Horizontal">
                     <iconPacks:PackIconMaterial Kind="Application" 
                                                 Width="24" 
@@ -109,7 +44,6 @@
                                                 VerticalAlignment="Center" 
                                                 Margin="0,0,12,0"/>
                     <TextBlock Text="Manage Blocked Applications" 
-                               FontSize="16" 
                                VerticalAlignment="Center"/>
                 </StackPanel>
             </Button>
