@@ -12,6 +12,8 @@ public partial class MainViewModel : ObservableObject
         "Prism",
         "welcome_completed");
 
+    private readonly Prism.Persistence.Services.DatabaseService _databaseService;
+
     [ObservableProperty]
     private object _currentViewModel;
 
@@ -20,6 +22,8 @@ public partial class MainViewModel : ObservableObject
 
     public MainViewModel()
     {
+        _databaseService = new Prism.Persistence.Services.DatabaseService();
+
         // Check if user has already seen the welcome page
         if (!HasCompletedWelcome())
         {
@@ -30,7 +34,8 @@ public partial class MainViewModel : ObservableObject
         {
             CurrentViewModel = new DashboardViewModel(
                 () => NavigateBlockedWebsites(),
-                () => NavigateBlockedApplications());
+                () => NavigateBlockedApplications(),
+                _databaseService);
         }
     }
 
@@ -62,13 +67,15 @@ public partial class MainViewModel : ObservableObject
         ShowSidebar = true;
         CurrentViewModel = new DashboardViewModel(
             () => NavigateBlockedWebsites(),
-            () => NavigateBlockedApplications());
+            () => NavigateBlockedApplications(),
+            _databaseService);
     }
 
     [RelayCommand]
     private void NavigateDashboard() => CurrentViewModel = new DashboardViewModel(
         () => NavigateBlockedWebsites(),
-        () => NavigateBlockedApplications());
+        () => NavigateBlockedApplications(),
+        _databaseService);
 
     [RelayCommand]
     private void NavigateSchedule() => CurrentViewModel = new ScheduleViewModel();
@@ -80,8 +87,8 @@ public partial class MainViewModel : ObservableObject
     private void NavigateSettings() => CurrentViewModel = new SettingsViewModel();
 
     [RelayCommand]
-    private void NavigateBlockedWebsites() => CurrentViewModel = new BlockedWebsitesViewModel(() => NavigateDashboard());
+    private void NavigateBlockedWebsites() => CurrentViewModel = new BlockedWebsitesViewModel(() => NavigateDashboard(), _databaseService);
 
     [RelayCommand]
-    private void NavigateBlockedApplications() => CurrentViewModel = new BlockedApplicationsViewModel(() => NavigateDashboard());
+    private void NavigateBlockedApplications() => CurrentViewModel = new BlockedApplicationsViewModel(() => NavigateDashboard(), _databaseService);
 }

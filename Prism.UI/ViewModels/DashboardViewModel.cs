@@ -18,11 +18,11 @@ public partial class DashboardViewModel : ObservableObject
 
     public ObservableCollection<string> RecentPickups { get; } = new();
 
-    public DashboardViewModel() : this(null, null)
+    public DashboardViewModel() : this(null, null, null)
     {
     }
 
-    public DashboardViewModel(Action? navigateToBlockedWebsites, Action? navigateToBlockedApplications)
+    public DashboardViewModel(Action? navigateToBlockedWebsites, Action? navigateToBlockedApplications, Prism.Persistence.Services.DatabaseService? databaseService)
     {
         _navigateToBlockedWebsites = navigateToBlockedWebsites;
         _navigateToBlockedApplications = navigateToBlockedApplications;

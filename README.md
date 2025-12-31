@@ -91,3 +91,9 @@ To clear the welcome page use this command:
 ```powershell
 Remove-Item "$env:LOCALAPPDATA\Prism\welcome_completed" -ErrorAction SilentlyContinue
 ```
+### Resetting Application Data
+
+To completely reset the application (delete database and settings):
+```powershell
+Remove-Item -Recurse -Force "$env:LOCALAPPDATA\Prism"
+```

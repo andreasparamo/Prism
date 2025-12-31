@@ -12,16 +12,36 @@ public partial class BlockedApplicationsViewModel : ObservableObject
     [ObservableProperty]
     private string _newApplicationName = string.Empty;
 
+    private readonly Prism.Persistence.Services.DatabaseService? _databaseService;
+
     public ObservableCollection<string> BlockedApplications { get; } = new();
 
-    public BlockedApplicationsViewModel(Action navigateBack)
+    public BlockedApplicationsViewModel(Action navigateBack, Prism.Persistence.Services.DatabaseService? databaseService = null)
     {
         _navigateBack = navigateBack;
-        
-        // Sample data
-        BlockedApplications.Add("Steam");
-        BlockedApplications.Add("Discord");
-        BlockedApplications.Add("Spotify");
+        _databaseService = databaseService;
+
+        LoadData();
+    }
+
+    private void LoadData()
+    {
+        BlockedApplications.Clear();
+        if (_databaseService != null)
+        {
+            var apps = _databaseService.GetBlockedApplications();
+            foreach (var app in apps)
+            {
+                BlockedApplications.Add(app);
+            }
+        }
+        else
+        {
+            // Fallback for design-time or no service
+            BlockedApplications.Add("Steam");
+            BlockedApplications.Add("Discord");
+            BlockedApplications.Add("Spotify");
+        }
     }
 
     [RelayCommand]
@@ -32,7 +52,11 @@ public partial class BlockedApplicationsViewModel : ObservableObject
     {
         if (!string.IsNullOrWhiteSpace(NewApplicationName))
         {
-            BlockedApplications.Add(NewApplicationName);
+            if (!BlockedApplications.Contains(NewApplicationName))
+            {
+                BlockedApplications.Add(NewApplicationName);
+                _databaseService?.AddBlockedApplication(NewApplicationName);
+            }
             NewApplicationName = string.Empty;
         }
     }
@@ -40,6 +64,10 @@ public partial class BlockedApplicationsViewModel : ObservableObject
     [RelayCommand]
     private void RemoveApplication(string application)
     {
-        BlockedApplications.Remove(application);
+        if (BlockedApplications.Contains(application))
+        {
+            BlockedApplications.Remove(application);
+            _databaseService?.RemoveBlockedApplication(application);
+        }
     }
 }
