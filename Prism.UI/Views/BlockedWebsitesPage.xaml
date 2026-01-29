@@ -62,11 +62,24 @@
             </Grid>
 
             <!-- Blocked Websites List Header -->
-            <TextBlock Grid.Row="2"
-                       Text="Blocked Websites" 
-                       FontSize="20" 
-                       FontWeight="SemiBold" 
-                       Margin="0,0,0,15"/>
+            <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,0,0,15">
+                <TextBlock Text="Blocked Websites" 
+                           FontSize="20" 
+                           FontWeight="SemiBold" 
+                           VerticalAlignment="Center"/>
+                <iconPacks:PackIconMaterial Kind="AlertCircleOutline" 
+                                            Width="18" 
+                                            Height="18" 
+                                            Margin="10,0,0,0"
+                                            VerticalAlignment="Center"
+                                            Foreground="#FFA500"
+                                            ToolTip="Restart your browser for blocking to take effect"/>
+                <TextBlock Text="User must restart browser for blocking to start working"
+                           FontSize="12"
+                           Foreground="#FFA500"
+                           Margin="8,0,0,0"
+                           VerticalAlignment="Center"/>
+            </StackPanel>
             
             <!-- List -->
             <ScrollViewer Grid.Row="3" VerticalScrollBarVisibility="Auto">

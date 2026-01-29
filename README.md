@@ -48,7 +48,9 @@ The solution uses a Clean Architecture / Modular Monolith approach:
 *   **OS:** Windows 10/11 (x64)
 *   **.NET SDK:** .NET 8.0 ([Download](https://dotnet.microsoft.com/en-us/download/dotnet/8.0))
 
-### running the App
+### Running the App
+
+> ⚠️ **Important:** Your IDE or terminal must be run with **elevated administrator rights** for the application to function properly (required for website blocking via hosts file modification).
 
 1.  **Clone the Repository**:
     ```powershell
@@ -81,7 +83,7 @@ The solution uses a Clean Architecture / Modular Monolith approach:
 
 *   **Local-Only:** No data ever leaves the user's machine.
 *   **No Cloud APIs:** No accounts, no sync.
-*   **No Admin Rights:** Designed to run in standard User Mode.
+*   **Admin Rights Required:** Requires elevated privileges for website blocking (hosts file modification).
 
 ---
 
