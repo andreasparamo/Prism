@@ -2,6 +2,7 @@
 using Prism.Monitoring;
 using Prism.Persistence.Services;
 using Prism.UI.Views;
+using System.Security.Principal;
 using System.Windows;
 using System.Windows.Threading;
 
@@ -17,6 +18,20 @@ public partial class App : Application
     {
         base.OnStartup(e);
 
+        // Check for admin privileges (required for app blocking)
+        if (!IsRunningAsAdministrator())
+        {
+            MessageBox.Show(
+                "Prism requires administrator privileges to block applications.\n\n" +
+                "Please right-click the application and select 'Run as administrator'.",
+                "Administrator Required",
+                MessageBoxButton.OK,
+                MessageBoxImage.Warning
+            );
+            Shutdown(1);
+            return;
+        }
+
         // Seed Data for Testing
         _databaseService.SetAppCategory("notepad", AppCategory.Distracting); 
         _databaseService.SetAppCategory("msedge", AppCategory.Productive);
@@ -24,6 +39,20 @@ public partial class App : Application
 
         _monitorService.WindowChanged += MonitorService_WindowChanged;
         _monitorService.Start();
+    }
+
+    private static bool IsRunningAsAdministrator()
+    {
+        try
+        {
+            using var identity = WindowsIdentity.GetCurrent();
+            var principal = new WindowsPrincipal(identity);
+            return principal.IsInRole(WindowsBuiltInRole.Administrator);
+        }
+        catch
+        {
+            return false;
+        }
     }
 
     protected override void OnExit(ExitEventArgs e)

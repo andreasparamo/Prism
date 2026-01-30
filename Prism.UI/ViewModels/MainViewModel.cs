@@ -17,6 +17,18 @@ public partial class MainViewModel : ObservableObject
     [ObservableProperty]
     private object _currentViewModel;
 
+    /// <summary>
+    /// Disposes IDisposable ViewModels when navigating away.
+    /// This ensures WMI watchers are properly cleaned up.
+    /// </summary>
+    partial void OnCurrentViewModelChanging(object value)
+    {
+        if (value is IDisposable disposable)
+        {
+            disposable.Dispose();
+        }
+    }
+
     [ObservableProperty]
     private bool _showSidebar = true;
 

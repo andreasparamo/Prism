@@ -11,14 +11,15 @@
     <Border Background="{StaticResource CardBackground}" Padding="30">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>  <!-- Header -->
+                <RowDefinition Height="Auto"/>  <!-- Status Message -->
+                <RowDefinition Height="Auto"/>  <!-- Add Application Section -->
+                <RowDefinition Height="Auto"/>  <!-- List Header -->
+                <RowDefinition Height="*"/>     <!-- List -->
             </Grid.RowDefinitions>
 
             <!-- Header -->
-            <Grid Grid.Row="0" Margin="0,0,0,30">
+            <Grid Grid.Row="0" Margin="0,0,0,20">
                 <Button HorizontalAlignment="Left"
                         Style="{StaticResource MaterialDesignIconButton}"
                         Command="{Binding NavigateBackCommand}">
@@ -32,8 +33,16 @@
                            VerticalAlignment="Center"/>
             </Grid>
 
+            <!-- Status Message -->
+            <TextBlock Grid.Row="1"
+                       Text="{Binding StatusMessage}"
+                       FontSize="14"
+                       Margin="0,0,0,20"
+                       HorizontalAlignment="Center"
+                       Foreground="{DynamicResource MaterialDesignBody}"/>
+
             <!-- Add Application Section -->
-            <Grid Grid.Row="1" Margin="0,0,0,30">
+            <Grid Grid.Row="2" Margin="0,0,0,30">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
@@ -62,14 +71,14 @@
             </Grid>
 
             <!-- Blocked Applications List Header -->
-            <TextBlock Grid.Row="2"
+            <TextBlock Grid.Row="3"
                        Text="Blocked Applications" 
                        FontSize="20" 
                        FontWeight="SemiBold" 
                        Margin="0,0,0,15"/>
             
             <!-- List -->
-            <ScrollViewer Grid.Row="3" VerticalScrollBarVisibility="Auto">
+            <ScrollViewer Grid.Row="4" VerticalScrollBarVisibility="Auto">
                 <ItemsControl ItemsSource="{Binding BlockedApplications}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
